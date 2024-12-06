@@ -1,1 +1,61 @@
-<p>register works!</p>
+<main class="container py-3 full-height">
+    <div class="row">
+        <section class="col-md-4 offset-md-4 mt-5">
+            <!-- formGroup conecta el formulario del TS, en (ngSubmit) se pone el metodo que se ejcuta al enviar el form-->
+            <form [formGroup]="form" (ngSubmit)="submit()" class="card card-body bg-light-subtle">
+                <h1 class="text-center">Registrarse</h1>
+                <!-- formControlName conecta los inputs con los controladores del TS -->
+                <div class="mb-3">
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" placeholder="escribe tu Nombre de usuario" name="username" id="username" class="form-control"
+                    formControlName="username" [ngClass]="{'is-invalid': hasErrors('username','required') || hasErrors('username','minlength')}"> <!-- si hay error añade esa clase css-->
+
+                    <!-- Si hay un error muestra el mensaje del error -->
+                     @if(hasErrors('username','required')) {
+                        <div class="text-danger"> nombre requerido</div>
+
+                     }@else if (hasErrors('username','minlength')) {
+                        <div class="text-danger"> nombre tiene que tener minimo 3 letras</div>
+                     }
+                </div>
+
+                <div class="mb-3">
+                    <label for="password1">Contraseña:</label>
+                    <input type="password" placeholder="escribe tu contraseña" name="password1" id="password1" class="form-control"
+                    formControlName="password1" [ngClass]="{'is-invalid': hasErrors('password1','required') || hasErrors('password1','minlength')}">
+
+                    @if(hasErrors('password1','required')) {
+                        <div class="text-danger"> contraseña requerida</div>
+
+                     }@else if (hasErrors('password1','minlength')) {
+                        <div class="text-danger"> contraseña tiene que tener minimo 3 letras</div>
+                     }
+                </div>
+
+                <div class="mb-3">
+                    <label for="password2">Confirma tu contraseña:</label>
+                    <input type="password" placeholder="Escribe tu contraseña de nuevo" name="password2" id="password2" class="form-control"
+                    formControlName="password2" [ngClass]="{'is-invalid': hasErrors('password2','required') || hasErrors('password2','minlength')}">
+
+                    
+                    @if(hasErrors('password2','required')) {
+                        <div class="text-danger"> contraseña requerida</div>
+
+                     }@else if (hasErrors('password2','minlength')) {
+                        <div class="text-danger"> contraseña tiene que tener minimo 3 letras</div>
+                     }
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-dark" type="submit">
+                        Registrar
+                    </button>
+                </div>
+
+                @if(errorMessage) {
+                    <div class="alert alert-danger mt-3"> {{ errorMessage }} </div>
+                 }
+            </form>
+        </section>
+    </div>
+</main>

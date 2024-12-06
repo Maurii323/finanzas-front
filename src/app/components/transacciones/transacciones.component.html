@@ -1,1 +1,5 @@
 <p>transacciones works!</p>
+
+@for (transaction of transactionsList; track transaction.id) {
+    {{transaction.nombre}}
+}

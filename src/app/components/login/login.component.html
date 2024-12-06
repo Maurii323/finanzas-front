@@ -1,1 +1,47 @@
-<p>login works!</p>
+<main class="container py-3 full-height">
+    <div class="row">
+        <section class="col-md-4 offset-md-4 mt-5">
+            <form [formGroup]="form" (ngSubmit)="submit()" class="card card-body bg-light-subtle ">
+                <h1 class="text-center">Iniciar Sesión</h1>
+
+                <div class="mb-3">
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" placeholder="escribe tu Nombre de usuario" name="username" id="username" class="form-control"
+                    formControlName="username" [ngClass]="{'is-invalid': hasErrors('username','required') || hasErrors('username','minlength')}"> <!-- si hay error añade esa clase css-->
+
+                    <!-- Si hay un error muestra el mensaje del error -->
+                     @if(hasErrors('username','required')) {
+                        <div class="text-danger"> nombre requerido</div>
+
+                     }@else if (hasErrors('username','minlength')) {
+                        <div class="text-danger"> nombre tiene que tener minimo 3 letras</div>
+                     }
+                </div>
+
+                <div class="mb-3">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" placeholder="escribe tu contraseña" name="password" id="password" class="form-control"
+                    formControlName="password" [ngClass]="{'is-invalid': hasErrors('password','required') || hasErrors('password','minlength')}">
+
+                    @if(hasErrors('password','required')) {
+                        <div class="text-danger"> contraseña requerida</div>
+
+                     }@else if (hasErrors('password','minlength')) {
+                        <div class="text-danger"> contraseña tiene que tener minimo 3 letras</div>
+                     }
+                </div>
+
+                <div class="text-center" >
+                    <button class="btn btn-dark" type="submit">
+                        Iniciar Sesión
+                    </button>
+                </div>
+
+
+                @if(errorMessage) {
+                    <div class="alert alert-danger mt-3"> {{ errorMessage }} </div>
+                 }
+            </form>
+        </section>
+    </div>
+</main>
