@@ -1,5 +1,129 @@
-<p>transacciones works!</p>
 
-@for (transaction of transactionsList; track transaction.id) {
-    {{transaction.nombre}}
-}
+    <!-- Contenedor principal -->
+    <div class="container mt-4">
+        <!-- Título -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="h3">Transacciones</h1>
+            <div class="d-flex align-items-center">
+                <div class="me-5">
+                    <h3> Balance: $</h3>
+
+                </div>
+                <!-- modal para crear una transaccion -->
+                <div class="me-5">
+                    <button class="btn btn-primary" id="new-transaction" data-bs-toggle="modal" data-bs-target="#ingresarModal" data-bs-whatever="@mdo">Nueva Transacción</button>
+                </div>
+                <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="ingresarModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content section-general border">
+                            <div class="modal-header">
+                                <h1 class="modal-title" id="ingresarModalLabel">Crear Transaccion</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <section class="modal-body">
+                                <form [formGroup]="form" (ngSubmit)="postTransaccion()" class="card card-body bg-light-subtle">            
+                                    <div class="mb-3">
+                                        <label for="nombre">Nombre:</label>
+                                        <input type="text" placeholder="escribe el nombre de la transaccion" name="nombre" id="nombre" class="form-control"
+                                        formControlName="nombre" [ngClass]="{'is-invalid': hasErrors('nombre','required')}"> <!-- si hay error añade esa clase css-->
+                    
+                                        <!-- Si hay un error muestra el mensaje del error -->
+                                            @if(hasErrors('nombre','required')) {
+                                            <div class="text-danger"> nombre requerido</div>
+                                            }
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="tipo">Categoria:</label>
+                                        <select class="form-select" name="categoria" id="categoria" formControlName="categoria" [ngClass]="{'is-invalid': hasErrors('categoria','required')}">
+                                            <option value="" disabled selected>Selecciona una categoria</option>
+                                            @for (category of categoryList; track category.id) {
+                                                <option value="{{ category.id }}">{{ category.nombre }}</option>
+                                            }
+                                        </select>
+                                        <!-- Si hay un error muestra el mensaje del error -->
+                                            @if(hasErrors('tipo','required')) {
+                                            <div class="text-danger">categoria requerido</div>
+                                            }
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="tipo">Tipo:</label>
+                                        <select class="form-select" name="tipo" id="tipo" formControlName="tipo" [ngClass]="{'is-invalid': hasErrors('tipo','required')}">
+                                            <option value="" disabled selected>Selecciona un tipo de transaccion</option>
+                                            <option value="ingreso">Ingreso</option>
+                                            <option value="costo">Costo</option>
+                                        </select>
+                                        <!-- Si hay un error muestra el mensaje del error -->
+                                            @if(hasErrors('tipo','required')) {
+                                            <div class="text-danger">tipo requerido</div>
+                                            }
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="monto">Monto:</label>
+                                        <input type="float" placeholder="escribe el monto de la transaccion" name="monto" id="monto" class="form-control"
+                                        formControlName="monto" [ngClass]="{'is-invalid': hasErrors('monto','required')}"> <!-- si hay error añade esa clase css-->
+                    
+                                        <!-- Si hay un error muestra el mensaje del error -->
+                                            @if(hasErrors('monto','required')) {
+                                            <div class="text-danger"> monto requerido</div>
+                                            }
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="username">Descripcion:</label>
+                                        <input type="text" placeholder="escribe una breve descripcion" name="descripcion" id="descripcion" class="form-control"
+                                        formControlName="descripcion" [ngClass]="{'is-invalid': hasErrors('descripcion','required')}"> <!-- si hay error añade esa clase css-->
+                    
+                                        <!-- Si hay un error muestra el mensaje del error -->
+                                            @if(hasErrors('descripcion','required')) {
+                                            <div class="text-danger"> descripcion requerido</div>
+                                            }
+                                    </div>
+
+                                    <div class="text-center" >
+                                        <button class="btn btn-dark" type="submit">
+                                            Crear
+                                        </button>
+                                    </div>
+                    
+                    
+                                    @if(errorMessage) {
+                                        <div class="alert alert-danger mt-3"> {{ errorMessage }} </div>
+                                        }
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Transacciones -->
+        <div class="mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Monto</th>
+                        <th scope="col">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Filas dinámicas de transacciones -->
+                    @for (transaction of transactionsList; track transaction.id) {
+                        <tr>
+                            <td>{{ transaction.nombre }}</td>
+                            <td>{{ transaction.categoria.nombre }}</td>
+                            <td class="text-danger">{{transaction.tipo}}</td>
+                            <td>{{ transaction.monto }}</td>
+                            <td>{{ transaction.fecha }}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
