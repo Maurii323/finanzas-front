@@ -94,13 +94,15 @@ export class AuthInterceptor implements HttpInterceptor {
     console.log('Interceptando solicitud:', request.url);
 
     // Excluir las solicitudes de login y registro para que no las maneje el interceptor
-    const excludedUrls = [`${this.apiUrl}/login`, `${this.apiUrl}/register`];
+    const excludedUrls = [`${this.apiUrl}/login`, `${this.apiUrl}/register`,`${this.apiUrl}/refresh`];
     if (excludedUrls.some(url => request.url.startsWith(url))) {
       return next.handle(request);  // Deja pasar las solicitudes de login y registro sin modificación
     }
 
     // Verificar si el accessToken está expirado
+    
     const accessToken = localStorage.getItem('accessToken') || '';
+    /*
     if (this.isTokenExpired(accessToken)) {
       console.warn('Access token expirado, intentando refrescar...');
       return this.refreshAccessToken().pipe(
@@ -118,7 +120,7 @@ export class AuthInterceptor implements HttpInterceptor {
         })
       );
     }
-
+    */
     // Si el token no está expirado, añadirlo en los headers de la solicitud
     const modifiedRequest = request.clone({
       setHeaders: {
@@ -165,8 +167,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private refreshAccessToken(): Observable<any> {
     const refreshToken = localStorage.getItem('refreshToken');
+    console.log("antes de intentar refrescar")
     return this.http.post(`${this.apiUrl}/refresh`, { refresh: refreshToken }, { withCredentials: true }).pipe(
       switchMap((res: any) => {
+        console.log("despues de intentar refrescar", res.access)
         localStorage.setItem('accessToken', res.access);
         return new Observable((observer) => {
           observer.next(res);
