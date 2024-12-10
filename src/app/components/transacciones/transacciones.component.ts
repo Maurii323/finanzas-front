@@ -94,7 +94,6 @@ export class TransaccionesComponent implements OnInit {
         },
         error: (e) => {
           console.log(e);
-          this.router.navigate(['/login']);
         }
       });
   }
@@ -108,7 +107,6 @@ export class TransaccionesComponent implements OnInit {
       },
       error: (e) => {
         console.log(e);
-        this.router.navigate(['/login']);
       }
     });
   }

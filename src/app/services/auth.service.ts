@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,7 +10,7 @@ export class AuthService {
   private _isAuthenticated = new BehaviorSubject<boolean>(this.checkAuthentication());
   isAuthenticated$ = this._isAuthenticated.asObservable();
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   checkAuthentication(): boolean {
     return typeof window !== 'undefined' && !!localStorage.getItem('accessToken');
@@ -25,6 +26,7 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     this._isAuthenticated.next(false);  // Actualizar el estado de autenticación
+    this.router.navigate(['/login']);
   }
 
   // Obtener el usuario logueado en el token 

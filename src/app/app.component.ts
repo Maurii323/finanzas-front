@@ -43,7 +43,7 @@ export class AppComponent implements OnInit{
   logout() {
     // elimina los token del localstorage y redirige al login
     this.authService.logout();
-    this.router.navigate(['/login']);
+
   }
 
   // verifica si esta autenticado para modificar la navegacion
