@@ -55,7 +55,7 @@ export class TransaccionesComponent implements OnInit {
 
   // metodo para realizar notificaciones
   showMessage(message:string): void {
-    this.snackBar.open(message, 'Cerrar', {
+    this.snackBar.open(message, 'Close', {
       duration: 5000, // Tiempo en milisegundos
       horizontalPosition: 'end',
       verticalPosition: 'bottom'
@@ -127,14 +127,14 @@ export class TransaccionesComponent implements OnInit {
     this.http.post<Transaccion>(`${this.apiUrl}/finanzas/transaccion/`, transaction)
     .subscribe({
       next: (res: any) => {
-        this.showMessage("Transaccion creada con exito")
+        this.showMessage("Transaction created successfully")
         this.formTransaction.reset();    // resetea el form
         this.getAllTransaction()    // carga las transacciones actualizadas
         this.calculateBalance()     // calcula el nuevo balance
       },
       error: (e) => {
         console.log(e);
-        this.showMessage("Error en la creacion de la transaccion, intente nuevamente")
+        this.showMessage("Transaction creation failed, try again")
       }
     });
     
@@ -150,13 +150,13 @@ export class TransaccionesComponent implements OnInit {
     this.http.post<Transaccion>(`${this.apiUrl}/finanzas/categorias/`, category)
     .subscribe({
       next: (res: any) => {
-        this.showMessage("Categoria creada con exito")
+        this.showMessage("Category created successfully")
         this.formCategory.reset();    // resetea el form
         this.getAllCategory()    // carga las categorias actualizadas
       },
       error: (e) => {
         console.log(e);
-        this.showMessage("Error en la creacion de la categoria, intente nuevamente")
+        this.showMessage("Category creation failed, try again")
       }
     });
   }
@@ -166,9 +166,9 @@ export class TransaccionesComponent implements OnInit {
     this.balance = 0
     for (const transaction of this.transactionsList) {
       // si es costo lo resta, si es ingreso lo suma
-      if (transaction.tipo == "costo") {
+      if (transaction.tipo == "Cost") {
         this.balance -= transaction.monto
-      }else if(transaction.tipo == "ingreso") {
+      }else if(transaction.tipo == "Income") {
         this.balance += transaction.monto
       }
       
@@ -185,10 +185,10 @@ export class TransaccionesComponent implements OnInit {
         );
         this.calculateBalance()     // calcula el nuevo balance
         modal.close();              // Cerrar el modal
-        this.showMessage("Transaccion eliminada con exito")
+        this.showMessage("Transaction deleted successfully")
       },
       error: (err) => {
-        this.showMessage("Error al eliminar la transaccion, intente nuevamente")
+        this.showMessage("Error deleting transaction, try again")
         console.error('Error al eliminar la transacción:', err);
       },
     });
@@ -219,10 +219,10 @@ export class TransaccionesComponent implements OnInit {
         this.getAllTransaction()
         this.calculateBalance()     // calcula el nuevo balance
         modal.close();
-        this.showMessage(`Transacción modificada con éxito.`)
+        this.showMessage(`Successfully modified transaction.`)
       },
       error: (err) => {
-        this.showMessage(`"Error al modificar la transaccion, intente nuevamente"`)
+        this.showMessage(`"Error modifying the transaction, try again"`)
         console.error('Error al modificar la transacción:', err);
       },
     });

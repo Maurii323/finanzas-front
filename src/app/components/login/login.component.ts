@@ -49,9 +49,9 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           // Manejar errores del backend
           if (error.status === 400 || error.status === 401) {
-            this.errorMessage = error.error?.error || 'Credenciales inválidas.';
+            this.errorMessage = error.error?.error || 'Invalid credentials.';
           } else {
-            this.errorMessage = 'Ocurrió un error inesperado. Intenta nuevamente.';
+            this.errorMessage = 'An unexpected error occurred. Try again.';
           }
             console.error('Error en el inicio de sesión:', error);
         }

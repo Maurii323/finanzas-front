@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       // en caso de error guarda el mensaje para mostrarlo en el registro
       error: (error) => {
         console.log('Error del backend:', error);
-        this.errorMessage = error.error?.error || 'Ocurrió un error inesperado.';
+        this.errorMessage = error.error?.error || 'An unexpected error occurred.';
       }
     });
   }

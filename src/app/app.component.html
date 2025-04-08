@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
-    <a class="navbar-brand espaciado">Finanzas</a>
+    <a class="navbar-brand espaciado">Finance</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,7 +10,7 @@
         @if(isAuthenticated()){
           <!-- Contenido para usuarios autenticados -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="/transacciones">Transacciones</a>
+            <a class="nav-link" routerLink="/transacciones">Transaction</a>
           </li>
           
           <li class="nav-item">
@@ -18,18 +18,18 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="logout()">Cerrar Sesión</a>
+            <a class="nav-link" href="#" (click)="logout()">Log Out</a>
           </li>
         }@else {
           <!-- Contenido para usuarios no autenticados -->
           <li class="nav-item">
-            <a class="nav-link " routerLink="/">Iniciar Sesión</a>
+            <a class="nav-link " routerLink="/">Log In</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" >|</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link " routerLink="/register">Registrarse</a>
+              <a class="nav-link " routerLink="/register">Sign In</a>
           </li>
         }
           

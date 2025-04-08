@@ -12,31 +12,31 @@
                 <!-- modal para crear una categoria -->
                  
                 <div class="me-5 col text-end">
-                    <button class="btn btn-primary" id="new-category" data-bs-toggle="modal" data-bs-target="#categoryModal" data-bs-whatever="@mdo">Nueva Categoria</button>
+                    <button class="btn btn-primary" id="new-category" data-bs-toggle="modal" data-bs-target="#categoryModal" data-bs-whatever="@mdo">New Category</button>
                 </div>
                 <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content section-general border">
                             <div class="modal-header">
-                                <h1 class="modal-title" id="categoryModalLabel">Crear Categoria</h1>
+                                <h1 class="modal-title" id="categoryModalLabel">Create Category</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <section class="modal-body">
                                 <form [formGroup]="formCategory" (ngSubmit)="postCategory()" class="card card-body bg-light-subtle">            
                                     <div class="mb-3">
-                                        <label for="nombreCategoria">Nombre:</label>
-                                        <input type="text" placeholder="escribe el nombre de la categoria" name="nombreCategoria" id="nombreCategoria" class="form-control"
+                                        <label for="nombreCategoria">Name:</label>
+                                        <input type="text" placeholder="write the catgory name" name="nombreCategoria" id="nombreCategoria" class="form-control"
                                         formControlName="nombreCategoria" [ngClass]="{'is-invalid': hasErrors('nombreCategoria','required')}"> <!-- si hay error añade esa clase css-->
                     
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('nombreCategoria','required')) {
-                                            <div class="text-danger"> nombre requerido</div>
+                                            <div class="text-danger"> Name is required</div>
                                             }
                                     </div>
 
                                     <div class="text-center" >
                                         <button class="btn btn-dark" type="submit">
-                                            Crear
+                                            Create
                                         </button>
                                     </div>
                     
@@ -48,80 +48,80 @@
                 
                 <!-- modal para crear una transaccion -->
                 <div class="me-5 col text-end">
-                    <button class="btn btn-primary" id="new-transaction" data-bs-toggle="modal" data-bs-target="#ingresarModal" data-bs-whatever="@mdo">Nueva Transacción</button>
+                    <button class="btn btn-primary" id="new-transaction" data-bs-toggle="modal" data-bs-target="#ingresarModal" data-bs-whatever="@mdo">New Transaction</button>
                 </div>
                 <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="ingresarModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content section-general border">
                             <div class="modal-header">
-                                <h1 class="modal-title" id="ingresarModalLabel">Crear Transaccion</h1>
+                                <h1 class="modal-title" id="ingresarModalLabel">Create Transaction</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <section class="modal-body">
                                 <form [formGroup]="formTransaction" (ngSubmit)="postTransaccion()" class="card card-body bg-light-subtle">            
                                     <div class="mb-3">
-                                        <label for="nombre">Nombre:</label>
-                                        <input type="text" placeholder="escribe el nombre de la transaccion" name="nombre" id="nombre" class="form-control"
+                                        <label for="nombre">Name:</label>
+                                        <input type="text" placeholder="Write the transaction name" name="nombre" id="nombre" class="form-control"
                                         formControlName="nombre" [ngClass]="{'is-invalid': hasErrors('nombre','required')}"> <!-- si hay error añade esa clase css-->
                     
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('nombre','required')) {
-                                            <div class="text-danger"> nombre requerido</div>
+                                            <div class="text-danger"> Name is required</div>
                                             }
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tipo">Categoria:</label>
+                                        <label for="tipo">Category:</label>
                                         <select class="form-select" name="categoria" id="categoria" formControlName="categoria" [ngClass]="{'is-invalid': hasErrors('categoria','required')}">
-                                            <option value="" disabled selected>Selecciona una categoria</option>
+                                            <option value="" disabled selected>Select a category</option>
                                             @for (category of categoryList; track category.id) {
                                                 <option value="{{ category.id }}">{{ category.nombre }}</option>
                                             }
                                         </select>
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('categoria','required')) {
-                                            <div class="text-danger">categoria requerido</div>
+                                            <div class="text-danger">Category is required</div>
                                             }
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tipo">Tipo:</label>
+                                        <label for="tipo">Type:</label>
                                         <select class="form-select" name="tipo" id="tipo" formControlName="tipo" [ngClass]="{'is-invalid': hasErrors('tipo','required')}">
-                                            <option value="" disabled selected>Selecciona un tipo de transaccion</option>
-                                            <option value="ingreso">Ingreso</option>
-                                            <option value="costo">Costo</option>
+                                            <option value="" disabled selected>Select a transaction type</option>
+                                            <option value="Income">Income</option>
+                                            <option value="Cost">Cost</option>
                                         </select>
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('tipo','required')) {
-                                            <div class="text-danger">tipo requerido</div>
+                                            <div class="text-danger">Type is required</div>
                                             }
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="monto">Monto:</label>
-                                        <input type="float" placeholder="escribe el monto de la transaccion" name="monto" id="monto" class="form-control"
+                                        <label for="monto">Amount:</label>
+                                        <input type="float" placeholder="Write the transaction amount" name="monto" id="monto" class="form-control"
                                         formControlName="monto" [ngClass]="{'is-invalid': hasErrors('monto','required')}"> <!-- si hay error añade esa clase css-->
                     
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('monto','required')) {
-                                            <div class="text-danger"> monto requerido</div>
+                                            <div class="text-danger"> Amount is required</div>
                                             }
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="username">Descripcion:</label>
-                                        <input type="text" placeholder="escribe una breve descripcion" name="descripcion" id="descripcion" class="form-control"
+                                        <label for="username">Description:</label>
+                                        <input type="text" placeholder="Write a description" name="descripcion" id="descripcion" class="form-control"
                                         formControlName="descripcion" [ngClass]="{'is-invalid': hasErrors('descripcion','required')}"> <!-- si hay error añade esa clase css-->
                     
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('descripcion','required')) {
-                                            <div class="text-danger"> descripcion requerido</div>
+                                            <div class="text-danger"> Description is required</div>
                                             }
                                     </div>
 
                                     <div class="text-center" >
                                         <button class="btn btn-dark" type="submit">
-                                            Crear
+                                            Create
                                         </button>
                                     </div>
                     
@@ -138,11 +138,11 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Categoria</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Monto</th>
-                        <th scope="col">Fecha</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Typo</th>
+                        <th scope="col">amount</th>
+                        <th scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody >
@@ -167,75 +167,75 @@
                             <div class="modal-body">
                                 <form [formGroup]="formTransaction" (ngSubmit)="putTransaccion(transaction.id,modal)" class="card card-body bg-light-subtle">            
                                     <div class="mb-3">
-                                        <label for="nombre">Nombre:</label>
-                                        <input type="text" placeholder="escribe el nombre de la transaccion" name="nombre" id="nombre" class="form-control"
+                                        <label for="nombre">Name:</label>
+                                        <input type="text" placeholder="Write the transaction name" name="nombre" id="nombre" class="form-control"
                                         formControlName="nombre" [ngClass]="{'is-invalid': hasErrors('nombre','required')}"> <!-- si hay error añade esa clase css-->
                     
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('nombre','required')) {
-                                            <div class="text-danger"> nombre requerido</div>
+                                            <div class="text-danger"> Name is required</div>
                                             }
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tipo">Categoria:</label>
+                                        <label for="tipo">Category:</label>
                                         <select class="form-select" name="categoria" id="categoria" formControlName="categoria" [ngClass]="{'is-invalid': hasErrors('categoria','required')}">
-                                            <option value="" disabled >Selecciona una categoria</option>
+                                            <option value="" disabled >Select a category</option>
                                             @for (category of categoryList; track category.id) {
                                                 <option value="{{ category.id }}">{{ category.nombre }}</option>
                                             }
                                         </select>
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('categoria','required')) {
-                                            <div class="text-danger">categoria requerido</div>
+                                            <div class="text-danger">Category is required</div>
                                             }
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="tipo">Tipo:</label>
+                                        <label for="tipo">Type:</label>
                                         <select class="form-select" name="tipo" id="tipo" formControlName="tipo" [ngClass]="{'is-invalid': hasErrors('tipo','required')}">
-                                            <option value="" disabled selected>Selecciona un tipo de transaccion</option>
-                                            <option value="ingreso">Ingreso</option>
-                                            <option value="costo">Costo</option>
+                                            <option value="" disabled selected>Select a transaction type</option>
+                                            <option value="Income">Income</option>
+                                            <option value="Cost">Cost</option>
                                         </select>
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('tipo','required')) {
-                                            <div class="text-danger">tipo requerido</div>
+                                            <div class="text-danger">Type is required</div>
                                             }
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="monto">Monto:</label>
-                                        <input type="float" placeholder="escribe el monto de la transaccion" name="monto" id="monto" class="form-control"
+                                        <label for="monto">Amount:</label>
+                                        <input type="float" placeholder="Write the transaction amount" name="monto" id="monto" class="form-control"
                                         formControlName="monto" [ngClass]="{'is-invalid': hasErrors('monto','required')}"> <!-- si hay error añade esa clase css-->
                     
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('monto','required')) {
-                                            <div class="text-danger"> monto requerido</div>
+                                            <div class="text-danger"> Amount is required</div>
                                             }
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="username">Descripcion:</label>
-                                        <input type="text" placeholder="escribe una breve descripcion" name="descripcion" id="descripcion" class="form-control"
+                                        <label for="username">Description:</label>
+                                        <input type="text" placeholder="Write a description" name="descripcion" id="descripcion" class="form-control"
                                         formControlName="descripcion" [ngClass]="{'is-invalid': hasErrors('descripcion','required')}"> <!-- si hay error añade esa clase css-->
                     
                                         <!-- Si hay un error muestra el mensaje del error -->
                                             @if(hasErrors('descripcion','required')) {
-                                            <div class="text-danger"> descripcion requerido</div>
+                                            <div class="text-danger"> Description is required</div>
                                             }
                                     </div>
 
                                     <div class="text-center" >
                                         <button class="btn btn-dark" type="submit">
-                                            Actualizar
+                                            Update
                                         </button>
                                     </div>
                     
                                 </form>
                             <div class="text-center mt-3" >
                                 <button class="btn btn-danger" (click)="deleteTransaccion(transaction.id,modal)">
-                                    Eliminar Transaccion
+                                    Delete Transaction
                                 </button>
                             </div>
 
